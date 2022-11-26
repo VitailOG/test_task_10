@@ -1,6 +1,5 @@
 import pytest
 
-from mixer.backend.django import mixer
 from main.models import MetaHotel
 
 pytestmark = [pytest.mark.django_db]

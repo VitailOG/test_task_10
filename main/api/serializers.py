@@ -9,6 +9,10 @@ class CreateHotelSerializer(serializers.Serializer):
     meta_hotel = serializers.PrimaryKeyRelatedField(allow_null=True, queryset=MetaHotel.objects.all(), required=False)
 
 
+class DetailHotelSerializer(CreateHotelSerializer):
+    history = serializers.JSONField()
+
+
 class MetaHotelSerializer(serializers.ModelSerializer):
     hotels = CreateHotelSerializer(many=True)
 

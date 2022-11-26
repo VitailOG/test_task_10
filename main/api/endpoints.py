@@ -2,14 +2,19 @@ from rest_framework import mixins, status
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from .serializers import CreateHotelSerializer, MetaHotelSerializer, CreateMetaHotelSerializer
+from .serializers import CreateHotelSerializer, MetaHotelSerializer, CreateMetaHotelSerializer, DetailHotelSerializer
+from main.viewsets import SerializerClassMixin
 from ..models import MetaHotel, Hotel
 from ..repositories.containers import MainContainer
 from ..services.create_meta_hotel import create_meta_hotel
 
 
-class HotelAPI(GenericViewSet):
-    serializer_class = CreateHotelSerializer
+class HotelAPI(SerializerClassMixin, GenericViewSet):
+    """ Api for hotel 2 """
+    serializers_map = {
+        "default": CreateHotelSerializer,
+        "retrieve": DetailHotelSerializer,
+    }
     queryset = Hotel.objects.all()
 
     def create(self, request):
@@ -17,6 +22,10 @@ class HotelAPI(GenericViewSet):
         serializer.is_valid(raise_exception=True)
         MainContainer.hotel.create_hotel(serializer.validated_data)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def retrieve(self, request, **kwargs):
+        serializer = self.get_serializer(self.get_object())
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def update(self, request, **kwargs):
         serializer = self.get_serializer(data=request.data, partial=True)

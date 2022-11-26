@@ -6,7 +6,7 @@ pytestmark = [pytest.mark.django_db]
 
 
 @pytest.fixture
-def meta_hotel():
+def meta_hotels():
     return mixer.cycle(2).blend('main.MetaHotel')
 
 
@@ -20,7 +20,7 @@ def meta_hotel():
 
 
 @pytest.fixture
-def send_request_on_update_hotel(api_client, hotel, meta_hotel):
+def send_request_on_update_hotel(api_client, hotel, meta_hotels):
     data = {
         "meta_hotel": 2
     }

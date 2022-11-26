@@ -11,8 +11,8 @@ def meta_hotel():
 
 
 @pytest.fixture
-def hotel():
-    return mixer.cycle(2).blend('main.Hotel', meta_hotel_id=1)
+def hotel(meta_hotel):
+    return mixer.cycle(2).blend('main.Hotel', meta_hotel_id=meta_hotel.id)
 
 
 @pytest.fixture

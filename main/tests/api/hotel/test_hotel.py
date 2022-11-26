@@ -6,15 +6,11 @@ pytestmark = [pytest.mark.django_db]  # pytest freeze
 
 
 @pytest.fixture
-def data():
-    return {
+def send_request_on_create_hotel(api_client):
+    data = {
         "name": "hotel 2",
         "supplier_id": "hot"
     }
-
-
-@pytest.fixture
-def send_request_on_create_hotel(api_client, data):
     return lambda: api_client.post('/hotel/', data)
 
 
@@ -36,8 +32,3 @@ def test_create_hotel_response(send_request_on_create_hotel):
     assert res.data['supplier_id'] == 'hot'
     assert res.data['meta_hotel'] is None
 
-
-def test_detail_hotel(api_client, hotel):
-    res = api_client.get(f'/hotel/{hotel.id}/')
-    print(res)
-    assert True
