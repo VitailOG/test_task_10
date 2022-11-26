@@ -10,13 +10,13 @@ def meta_hotel():
     return mixer.cycle(2).blend('main.MetaHotel')
 
 
-@pytest.fixture
-def hotel():
-    return mixer.blend(
-        'main.Hotel',
-        meta_hotel_id=1,
-        history={"history": [{"id": 16, "name": "Meta hotel", "join": "2022-11-20", "leave": "2022-11-20"}]}
-    )
+# @pytest.fixture
+# def hotel():
+#     return mixer.blend(
+#         'main.Hotel',
+#         meta_hotel_id=1,
+#         history={"history": [{"id": 16, "name": "Meta hotel", "join": "2022-11-20", "leave": "2022-11-20"}]}
+#     )
 
 
 @pytest.fixture

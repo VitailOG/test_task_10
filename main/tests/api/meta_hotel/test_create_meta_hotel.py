@@ -7,11 +7,6 @@ pytestmark = [pytest.mark.django_db]
 
 
 @pytest.fixture
-def hotel():
-    return mixer.blend('main.Hotel')
-
-
-@pytest.fixture
 def send_request_on_create_meta_hotel(api_client, hotel):
     data = {
         "name": "new meta hotel",

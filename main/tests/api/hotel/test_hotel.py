@@ -35,3 +35,9 @@ def test_create_hotel_response(send_request_on_create_hotel):
     assert res.data['name'] == 'hotel 2'
     assert res.data['supplier_id'] == 'hot'
     assert res.data['meta_hotel'] is None
+
+
+def test_detail_hotel(api_client, hotel):
+    res = api_client.get(f'/hotel/{hotel.id}/')
+    print(res)
+    assert True
